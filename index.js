@@ -1,9 +1,9 @@
-const body = document.querySelector('body')
+const main = document.getElementById('main')
 const enter_button = document.createElement('button')
 const contractBoard = document.createElement('div')
+const banner = document.createElement('img')
+banner.className = "banner"
 contractBoard.className = "contract_board"
-// const button = document.getElementById('enter_button')
-// const button = document.querySelector('button')
 
 
 fetch("http://127.0.0.1:3000/monsters")
@@ -19,19 +19,15 @@ function startGame(){
     enter_button.textContent = "ENTER"
     enter_button.className = "enter_button"
     enter_button.addEventListener("click",loadContracts)
-    body.appendChild(enter_button)
+    banner.src= "something_witcher_this_way_comes.png"
+    main.append(banner, enter_button)
     console.log("it worked")
     // loadContracts(monsters)
 }
 
-function alert(event){
-    const {className} = event.target
-    console.log({className})
-}
-
 function loadContracts(){
-    body.removeChild(enter_button)
-    // monstera = monsters[0]
+    main.removeChild(enter_button)
+    banner.style.height = "10rem"
     monsters.map(monster =>{
         contract = document.createElement('div')
         title = document.createElement('h1')
@@ -52,5 +48,5 @@ function loadContracts(){
         contract.append(title,image,place,reward)
         contractBoard.appendChild(contract)
     })
-   body.appendChild(contractBoard)
+   main.appendChild(contractBoard)
 }
