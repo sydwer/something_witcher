@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Berkshire+Swash&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Metamorphous&display=swap');
+body{
+    background-image: url(medallion.gif);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.banner{
+    height: 18rem;
+    position: absolute;
+    top: 2px;
+    left: 1rem;
+}
+
+.enter_button{
+    background-image: url("https://images.freecreatives.com/wp-content/uploads/2016/01/Metal-Texture-with-Scratches.jpg");
+    background-size: 100%;
+    background-position: center;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 2px solid #691104;
+    box-shadow: 5px 5px 50px #e41f08;
+    height: 6rem;
+    width: 11rem;
+    position: absolute;
+    right: 4.5rem;
+    top: 5rem;
+    font-family: 'Metamorphous', cursive;
+    font-size: 2rem;
+    text-shadow: 2px 2px 20px white;
+    color: black
+}
+.contract_board{
+    position: relative;
+    top: 10rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.contract {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url(contract_background.png);
+    background-size: cover;
+    color: black;
+}
+
+.contract > img {
+    /* justify-self: center; */
+    height: 20rem;
+    width: 15rem;
+}
+
