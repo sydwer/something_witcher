@@ -4,8 +4,6 @@
 /* font-family: 'Metamorphous', cursive; */
 body{
     background-image: url(medallion.gif);
-    /* background-size: cover;
-    background-repeat: no-repeat; */
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -43,7 +41,7 @@ body{
     align-items: center;
 }
 .town_board > img{
-    border: 5px solid black;
+    border: 3px solid #2f2322;
     width: 20%;
     align-self: center;
     margin-bottom: 30px;
@@ -110,6 +108,7 @@ body{
 .potion_list{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
     grid-gap: 2rem;
 }
 .potion_card{
@@ -118,16 +117,14 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #211816;
+    background-image: linear-gradient(#352623,#211816);
+    /* background-color: #211816; */
     border: 2px solid #dab382b3;
     width: 81%;
     color: #dab382b3;
 }
 .potion_card > img{
-    display: flex;
-    flex-direction: column;
-    align-items:center;
-    justify-content: space-around;
+    margin-top: 10px;
     width: 70%;
 }
 .potion_card > h3{
@@ -138,7 +135,7 @@ body{
 
 .potion_card>button{
     font-family: 'Berkshire Swash', cursive;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     height: 2rem;
     width: 80%;
     margin-bottom: 1rem;  
@@ -146,19 +143,101 @@ body{
 }
 .pick_your_potion{
     font-family: 'Metamorphous', cursive;
-    color: #dab382b3;
-    justify-self: center;
+    color: #a0875d;
+    text-shadow: 0px 0px 20px grey;
+    
 }
 
 .potion_card:hover{
     transform: scale(1.2);
 }
 
+.oilList{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    grid-gap: 1rem;
+}
+.oilCard{
+    font-family: 'Metamorphous', cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-image: linear-gradient(#352623,#211816);
+    /* background: #211816; */
+    border: 2px solid #dab382b3;
+    width: 75%;
+    color: #dab382b3;
+}
+.oilCard > img{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-around;
+    width: 30%;
+}
+.oilCard > h3{
+    height: 20%;
+    padding-left: 11px;
+    padding-right: 5px;
+}
 
+.oilCard>button{
+    font-family: 'Berkshire Swash', cursive;
+    font-size: 1.2rem;
+    height: 2rem;
+    width: 55%;
+    margin-bottom: 1rem;  
+    background-color: #dab382b3;
+}
+
+.oilCard:hover{
+    transform: scale(1.2);
+}
 .pick_your_oil{
+    color:#a0875d;
+    font-family: 'Metamorphous', cursive;
+    text-shadow: 0px 0px 20px grey;
+}
+
+.test{
     color: white;
 }
 
+.decisionBox{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+
+}
+.decisionBox>h1{
+    font-family: 'Metamorphous', cursive;
+    font-size: 4rem;
+    color: white;  
+    text-shadow: 0px 0px 20px green;
+}
+.picBar{
+    display: flex;
+    justify-content: space-around;
+    margin-left: 2rem;
+    /* height: 50%; */
+    width: 100%;
+}
+/* .picBar>img{
+    height: 80%;
+} */
+
+.battleField{
+    display: flex;
+    flex-direction: row;
+}
+
+.battleImg{
+    height: 33%;
+}
 
 
 
