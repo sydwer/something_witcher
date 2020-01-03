@@ -125,7 +125,7 @@ body{
 }
 .potion_card > img{
     margin-top: 10px;
-    width: 70%;
+    width: 45%;
 }
 .potion_card > h3{
     height: 20%;
@@ -233,12 +233,67 @@ body{
 .battleField{
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .battleImg{
-    height: 33%;
+    align-self: center;
+    width: 19rem;
+    height: 23rem;
+    border: 2px solid #a0875d;
+    margin-bottom: 10rem;
 }
 
+.witcherScreen{
+    border: 3px double #a0875d;
+    padding-left: 2rem;
+    font-family: 'Metamorphous', cursive;
+    color: white;
+    text-shadow: 0px 0px 20px gold;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+
+.monsterScreen{
+    border: 3px double #a0875d;
+    padding-left: 2rem;
+    font-family: 'Metamorphous', cursive;
+    color: white;
+    text-shadow: 0px 0px 20px yellow;
+    background-color: #5f1d237d;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.battleBanner{
+    font-family: 'Metamorphous', cursive;
+    color: #a0875d;
+    text-shadow: 0px 0px 20px red;
+}
+
+.inventory{
+    width: 66%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.attackBox{
+    font-family: 'Metamorphous', cursive;
+    color: #a0875d;
+    text-shadow: 0px 0px 20px red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-top: 3px double #a0875d;
+    border-bottom: 3px double #a0875d;
+    width: 20%;
+    background-color: #06060085;
+}
 
 
 

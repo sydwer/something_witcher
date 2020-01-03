@@ -8,6 +8,7 @@ const oilList = document.createElement('div')
 const banner = document.createElement('img')
 const instructions = document.createElement('h1')
 const battleField = document.createElement('div')
+const attackBox = document.createElement('div')
 const geraltButton = document.createElement('button')
 const ciriButton = document.createElement('button')
 const basicAudio = new Audio('choir.mp3')
@@ -26,12 +27,14 @@ let battleClip = null
 let monsters = null
 let potions = null
 let oils = null
+let signs = null
 
 let selected_witcher = null
 let selected_monster = null
 let equipped_potion = null
 let equipped_oil = null
 
+let turn = "witcher"
 let monster_hp = null
 let witcher_hp = 100
 let witcher_energy = 4
@@ -48,16 +51,13 @@ fetch("http://127.0.0.1:3000/monsters")
 
 function storeResponse(data){
     monsters = data
-    // console.log(randomPlace)
     // basicAudio.play()
 }
 function startGame(){
     enter_button.textContent = "ENTER"
     enter_button.className = "enter_button"
-    // enter_button.addEventListener("click",goToTown)
     enter_button.addEventListener("click",whichWitcher)
     banner.src= "something_witcher_this_way_comes.png"
-    // audio.play();
     main.append(banner, enter_button)
 }
 
@@ -88,10 +88,8 @@ function loadWitcher(event){
 
     if (event.target.className === "geraltButton"){
         selected_witcher = geralt
-        // battleClip = geraltGif
     }else{
         selected_witcher = ciri
-        // battleClip = ciriGif
     }
     console.log(selected_witcher)
     goToTown()
@@ -238,10 +236,8 @@ function useOil(event){
         goToEncounter()
 }
 function goToEncounter(){
-    battleAudio.play();
-    // main.removeChild(oilList)
+    // battleAudio.play();
     if(selected_witcher === geralt){
-        // body.style.backgroundImage = "url('https://steamuserimages-a.akamaihd.net/ugc/955227220413855705/181BFD92E6E73EED9C732D60F73B182B3858B2DC/')"
         body.style.backgroundImage = "url('https://thumbs.gfycat.com/ExcitableAridBetafish.webp')"
     }else{
         body.style.backgroundImage = "url('https://thumbs.gfycat.com/SpecificCostlyChick-size_restricted.gif')"
@@ -252,36 +248,86 @@ function goToEncounter(){
 }
 function beginEncounter(){
     body.style.backgroundImage = "url('https://i.kinja-img.com/gawker-media/image/upload/t_original/kzocepplr2gfbnkyxrd5.gif')"
-    // randomPlace
-    // main.removeChild(oilList)
-    // if(selected_witcher === geralt){
-    //     body.style.backgroundImage = "url('https://steamuserimages-a.akamaihd.net/ugc/955227220413855705/181BFD92E6E73EED9C732D60F73B182B3858B2DC/')"
-    // }else{
-    //     body.style.backgroundImage = "url('https://thumbs.gfycat.com/SpecificCostlyChick-size_restricted.gif')"
-    // }
-    // setTimeout(function(){ loadContracts(); }, 2100)
     instructions.textContent = "Let the Battle Begin"
-    instructions.className = "test"
+    instructions.className = "battleBanner"
+    fetch('http://127.0.0.1:3000/signs')
+    .then(response => response.json)
+    .then(storeSigns)
+   
+
+    // makeWitcher()
+    // makeMonster()
+    // main.appendChild(battleField)
+    // battleField.className = "battleField"
+
+}
+function storeSigns(data){
+    signs = data 
+    makeScreen()
+}
+
+function makeScreen(){
     makeWitcher()
+    makeAttackBox()
     makeMonster()
     main.appendChild(battleField)
     battleField.className = "battleField"
+}
 
+function makeAttackBox(){
+    const message = document.createElement('h1')
+    attackBox.className = "attackBox"
+    if(turn === "monster"){
+        message.textContent = `${selected_monster.name}'s turn`
+    }else{
+        message.textContent = "Your Turn"
+    }
+    attackBox.appendChild(message)
+    battleField.appendChild(attackBox)
 }
 
 function makeWitcher(){
     const witcherScreen = document.createElement('div')
+    const ui = document.createElement('div')
+    const uiHeader = document.createElement('h4')
     const image = document.createElement('img')
     const name = document.createElement('h1')
     const hp = document.createElement('h2')
+    const energy = document.createElement('h3')
+    const oilSprite = document.createElement('div')
+    const potionSprite = document.createElement('div')
+    const oil = document.createElement('h5')
+    const oilImg = document.createElement('img')
+    const potion = document.createElement('h5')
+    const potionImg = document.createElement('img')
+    
+    ui.className = "inventory"
 
     image.src = selected_witcher
-    image.className = "battleImg"
-    name.textContent = "Witcher"
-    hp.textContent = witcher_hp
-
-    witcherScreen.append(name,hp, image)
+    hp.textContent = `HP: ${witcher_hp}`
+    energy.textContent = `Energy: ${witcher_energy}`
+    uiHeader.textContent = "Inventory"
+    potion.textContent = equipped_potion.name
+    oil.textContent = equipped_oil.name
+    potionImg.src = equipped_potion.img_src
+    oilImg.src = equipped_oil.img_src
+    
+    oilSprite.append(oilImg,oil)
+    potionSprite.append(potionImg,potion)
+    ui.append(uiHeader ,potionSprite,oilSprite)
+    witcherScreen.append(name,hp,energy,image,ui)
     battleField.appendChild(witcherScreen)
+
+    if (selected_witcher === geralt){
+        name.textContent = "Geralt of Rivia"
+        witcherScreen.style.backgroundColor = "#3128777a"
+    }else{
+        name.textContent = 'Cirilla "Ciri" Fiona Elen Riannon'
+        witcherScreen.style.backgroundColor = "#28775a7a"
+    }
+
+    image.className = "battleImg"
+    witcherScreen.className = "witcherScreen"
 }
 
 function makeMonster(){
@@ -289,15 +335,20 @@ function makeMonster(){
     const image = document.createElement('img')
     const name = document.createElement('h1')
     const hp = document.createElement('h2')
+    const energy = document.createElement('h3')
 
     image.src = selected_monster.img_src
-    image.className = "battleImg"
     name.textContent = selected_monster.name
-    hp.textContent = selected_monster.health_points
+    hp.textContent = `HP: ${selected_monster.health_points}`
+    energy.textContent = `Energy: ?`
 
-    monsterScreen.append(name,hp, image)
+    image.className = "battleImg"
+    monsterScreen.className = "monsterScreen"
+
+    monsterScreen.append(name,hp,energy, image)
     battleField.appendChild(monsterScreen)
 }
+
 
 // function startBattle(){
 
