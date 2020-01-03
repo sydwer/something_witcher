@@ -4,8 +4,12 @@
 /* font-family: 'Metamorphous', cursive; */
 body{
     background-image: url(medallion.gif);
-    background-size: cover;
+    /* background-size: cover;
+    background-repeat: no-repeat; */
+    background-attachment: fixed;
+    background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .banner{
@@ -36,18 +40,22 @@ body{
 .town_board{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
-
 .town_board > img{
-    width: 33%;
+    border: 5px solid black;
+    width: 20%;
     align-self: center;
-    padding-bottom: 30px;
+    margin-bottom: 30px;
 }
 .contract_board{
+    width: 96.6%;
+    background-image: url("https://s3.amazonaws.com/files.d20.io/marketplace/552206/uk_E8PAGp-P1JwVONV6t5Q/max.jpg?1529949001");
+    background-size: cover;
     font-family: 'Metamorphous', cursive;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-gap: 4.2rem;
 }
 .contract {
     display: flex;
@@ -59,16 +67,31 @@ body{
     background-position: center;
     color: black;
 }
-.contract > h2{
-    padding-bottom: 10px;
-}
+
 .contract > h4{
     font-size: 1.2rem;
+    padding-top: 1.4rem;
     margin-bottom: 0;
 }
 .contract > h3{
     margin-left: 15px;
     margin-right: 15px;
+}
+.contract > button {
+    font-family: 'Berkshire Swash', cursive;
+    font-size: 1.3rem;
+    height: 2rem;
+    width: 66%;
+    margin-bottom: 1rem;  
+    background-color: #dab382b3;
+}
+#description {
+    height: 15%;
+    padding-left: 9px;
+    padding-right: 9px;
+    margin: 0;
+    overflow:auto;
+    font-size: 1rem;
 }
 .contract > img {
     border-radius: 7.5px;
@@ -76,4 +99,21 @@ body{
     height: 20rem;
     width: 15rem;
 }
+
+.contract:hover{
+    transform: scale(1.2);
+    box-shadow: 8px 8px 40px black;
+}
+.contract > button:hover{
+    transform: scale(1.2);
+}
+
+
+
+
+
+
+
+
+
 
