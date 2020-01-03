@@ -7,8 +7,12 @@ const potionList = document.createElement('div')
 const oilList = document.createElement('div')
 const banner = document.createElement('img')
 const instructions = document.createElement('h1')
+const monsterHp = document.createElement('h2')
+const witcherHp = document.createElement('h2')
+const energy = document.createElement('h3')
 const battleField = document.createElement('div')
 const attackBox = document.createElement('div')
+const attackBoxMessage = document.createElement('h1')
 const geraltButton = document.createElement('button')
 const ciriButton = document.createElement('button')
 const basicAudio = new Audio('choir.mp3')
@@ -27,7 +31,10 @@ let battleClip = null
 let monsters = null
 let potions = null
 let oils = null
-let signs = null
+let signArray = null
+let damage_done = []
+let damage_taken = []
+let energy_used = []
 
 let selected_witcher = null
 let selected_monster = null
@@ -35,7 +42,7 @@ let equipped_potion = null
 let equipped_oil = null
 
 let turn = "witcher"
-let monster_hp = null
+let monster_hp = null 
 let witcher_hp = 100
 let witcher_energy = 4
 
@@ -47,11 +54,21 @@ contractBoard.className = "contract_board"
 fetch("http://127.0.0.1:3000/monsters")
 .then(response => response.json())
 .then(storeResponse)
+.then(getSigns)
 .then(startGame)
 
 function storeResponse(data){
     monsters = data
-    // basicAudio.play()
+    basicAudio.play()
+}
+
+function getSigns(){
+    fetch('http://127.0.0.1:3000/signs')
+    .then(response => response.json())
+    .then(storeSigns)
+}
+function storeSigns(data){
+    signArray = data
 }
 function startGame(){
     enter_button.textContent = "ENTER"
@@ -91,7 +108,6 @@ function loadWitcher(event){
     }else{
         selected_witcher = ciri
     }
-    console.log(selected_witcher)
     goToTown()
 }
 function goToTown(){
@@ -146,8 +162,7 @@ function loadContracts(){
 
 function selectContract(event){
     selected_monster = (monsters.find(obj => obj.name === event.target.value)) 
-    monster_hp = selected_monster
-    console.log(selected_monster)
+    monster_hp = selected_monster.health_points
     fetch("http://127.0.0.1:3000/potions")
     .then(response => response.json())
     .then(storePotions)
@@ -157,7 +172,6 @@ function storePotions(data){
     makePreperations()
 }
 function makePreperations(){
-    console.log(potions)
     body.style.backgroundImage = "url('https://media2.giphy.com/media/CMvgWSEKDUvaE/source.gif'"
     main.removeChild(townBoard)
     choosePotion(potions)
@@ -193,7 +207,6 @@ function choosePotion(potions){
 
 function equipPotion(event){
     equipped_potion = (potions.find(obj => obj.name === event.target.value))
-    console.log(equipped_potion)
     fetch("http://127.0.0.1:3000/oils")
     .then(response => response.json())
     .then(storeOils)
@@ -231,12 +244,11 @@ function chooseOil(oils){
 
 function useOil(event){
         equipped_oil = (oils.find(obj => obj.name === event.target.value))
-        console.log(equipped_oil)
         main.removeChild(oilList)
         goToEncounter()
 }
 function goToEncounter(){
-    // battleAudio.play();
+    battleAudio.play();
     if(selected_witcher === geralt){
         body.style.backgroundImage = "url('https://thumbs.gfycat.com/ExcitableAridBetafish.webp')"
     }else{
@@ -248,11 +260,11 @@ function goToEncounter(){
 }
 function beginEncounter(){
     body.style.backgroundImage = "url('https://i.kinja-img.com/gawker-media/image/upload/t_original/kzocepplr2gfbnkyxrd5.gif')"
-    instructions.textContent = "Let the Battle Begin"
+    // instructions.textContent = "Let the Battle Begin"
     instructions.className = "battleBanner"
-    fetch('http://127.0.0.1:3000/signs')
-    .then(response => response.json)
-    .then(storeSigns)
+    // instructions.style.fontcolor= "red"
+    makeScreen()
+
    
 
     // makeWitcher()
@@ -261,30 +273,16 @@ function beginEncounter(){
     // battleField.className = "battleField"
 
 }
-function storeSigns(data){
-    signs = data 
-    makeScreen()
-}
+
 
 function makeScreen(){
     makeWitcher()
     makeAttackBox()
     makeMonster()
-    main.appendChild(battleField)
-    battleField.className = "battleField"
+    // main.appendChild(battleField)
 }
 
-function makeAttackBox(){
-    const message = document.createElement('h1')
-    attackBox.className = "attackBox"
-    if(turn === "monster"){
-        message.textContent = `${selected_monster.name}'s turn`
-    }else{
-        message.textContent = "Your Turn"
-    }
-    attackBox.appendChild(message)
-    battleField.appendChild(attackBox)
-}
+
 
 function makeWitcher(){
     const witcherScreen = document.createElement('div')
@@ -292,8 +290,8 @@ function makeWitcher(){
     const uiHeader = document.createElement('h4')
     const image = document.createElement('img')
     const name = document.createElement('h1')
-    const hp = document.createElement('h2')
-    const energy = document.createElement('h3')
+    // const wip = document.createElement('h2')
+    // const energy = document.createElement('h3')
     const oilSprite = document.createElement('div')
     const potionSprite = document.createElement('div')
     const oil = document.createElement('h5')
@@ -304,7 +302,7 @@ function makeWitcher(){
     ui.className = "inventory"
 
     image.src = selected_witcher
-    hp.textContent = `HP: ${witcher_hp}`
+    witcherHp.textContent = `HP: ${witcher_hp}`
     energy.textContent = `Energy: ${witcher_energy}`
     uiHeader.textContent = "Inventory"
     potion.textContent = equipped_potion.name
@@ -315,7 +313,7 @@ function makeWitcher(){
     oilSprite.append(oilImg,oil)
     potionSprite.append(potionImg,potion)
     ui.append(uiHeader ,potionSprite,oilSprite)
-    witcherScreen.append(name,hp,energy,image,ui)
+    witcherScreen.append(name,witcherHp,energy,image,ui)
     battleField.appendChild(witcherScreen)
 
     if (selected_witcher === geralt){
@@ -334,23 +332,150 @@ function makeMonster(){
     const monsterScreen = document.createElement('div')
     const image = document.createElement('img')
     const name = document.createElement('h1')
-    const hp = document.createElement('h2')
+    // const monsterHp = document.createElement('h2')
     const energy = document.createElement('h3')
 
     image.src = selected_monster.img_src
     name.textContent = selected_monster.name
-    hp.textContent = `HP: ${selected_monster.health_points}`
+    monsterHp.textContent = `HP: ${monster_hp}`
     energy.textContent = `Energy: ?`
 
     image.className = "battleImg"
     monsterScreen.className = "monsterScreen"
 
-    monsterScreen.append(name,hp,energy, image)
+    monsterScreen.append(name,monsterHp,energy, image)
     battleField.appendChild(monsterScreen)
+}
+function makeAttackBox(){
+    instructions.textContent = "Let The Battle Begin"
+    main.appendChild(battleField)
+    attackBox.className = "attackBox"
+    battleField.className = "battleField"
+    battleField.appendChild(attackBox)
+    displayAttacks()
 }
 
 
-// function startBattle(){
 
-// }
+
+function displayAttacks(signs){
+    const signBar = document.createElement('div')
+    const swordImg = document.createElement('img')
+    const swordName = document.createElement('h2')
+    const swordSprite = document.createElement('div')
+    const signSprite = document.createElement('div')
+
+    
+    swordImg.src = "https://pngimage.net/wp-content/uploads/2018/06/sword-hd-png-4.png"
+    swordName.textContent = "Sword Attack"
+    swordSprite.append(swordImg,swordName)
+    swordSprite.className = "sprite"
+    signBar.appendChild(swordSprite)
+
+    signBar.className = "attackBar"
+    signArray.map(sign=>{
+        const signImg =  document.createElement('img')
+        const signName =  document.createElement('h2')
+
+        signImg.src = sign.img_src
+        signName.textContent = sign.name 
+        signImg.value = sign.name
+        signSprite.append(signImg,signName)
+        signSprite.value = sign.name
+        signSprite.className = "sprite"
+        signBar.appendChild(signSprite)
+    })
+    attackBox.append(attackBoxMessage,signBar)
+    swordSprite.addEventListener("click", useSword)
+    signSprite.addEventListener("click",useSign)
+}
+
+
+
+function useSword(){
+    console.log("hi")
+    attackBoxMessage.textContent = "Your Turn"
+    const attempt = Math.floor(Math.random() * selected_monster.dodge_chance)
+    if (attempt < 3){
+        alert("You Missed")
+        
+    }else{
+        const newHp = monster_hp -= (damage_done.reduce((a, b) => a + b, 0))
+        monsterHp.textContent = `HP:${newHp}`
+        alert( "You Hit")
+        if (newHp<1){
+            win()
+        }
+
+    }
+    attackBoxMessage.textContent = "Monster's Turn"
+    turn = "monster"
+    setTimeout(function(){ monsterTurn(); }, 1000)
+
+}
+
+function monsterTurn(){
+    // attackBox.removeChild(signBar)
+    attackBoxMessage.textContent = `${selected_monster.name}'s turn`
+    const attempt = Math.floor(Math.random() * selected_monster.accuracy_rtg)
+    if(attempt < 3){
+         damage_taken.push(selected_monster.attack_pwr*1.5)
+        alert(`The ${selected_monster.name} hits you for ${selected_monster.attack_pwr} damage`)
+        const newHp = witcher_hp -= (damage_taken.reduce((a, b) => a + b, 0))
+        witcherHp.textContent = `HP:${newHp}`
+        if(newHp<1){
+            die()
+        }
+    }else{
+        alert(`The ${selected_monster.name} missed its attack`)
+    }
+    attackBoxMessage.textContent = "Your Turn"
+    // reset()
+    
+}
+
+function useSign(){
+    attackBoxMessage.textContent = `${selected_monster.name}'s turn`
+    console.log(event.target.value)
+     
+    energy_used.push(1)
+    newEnergy = witcher_energy -= (energy_used.reduce((a, b) => a + b, 0))
+    if(newEnergy > -2){
+        alert("Hit")
+        damage_done.push(5)
+        console.log(monster_hp)
+        energy.textContent = `Energy: ${newEnergy}`
+        const newHp = monster_hp -= (damage_done.reduce((a, b) => a + b, 0))
+        monsterHp.textContent = `HP:${newHp}`
+
+        if(newHp<0){win()}
+    }else{
+        energy.textContent = "Energy: 0"
+       alert("You're Out of Energy and Can't Cast Anymore Signs!")
+    }
+
+    setTimeout(function(){ monsterTurn(); }, 2500)
+   
+    // winOrDie()
+
+}
+function win(){
+    main.removeChild(instructions)
+    body.style.backgroundImage = "url('https://i.imgur.com/U1av40f.gif?noredirect')"
+    main.removeChild(battleField)
+    const message = document.createElement('h1')
+        message.textContent = `Congratulations! You Defeated the ${selected_monster.name}, and You Collect ${selected_monster.reward_amount} gold`
+        message.className = "endMessage"
+        main.appendChild(message)
+}
+
+function die(){
+    body.style.backgroundImage = "url('https://i.imgur.com/U1av40f.gif?noredirect')"
+    main.removeChild(instructions)
+    const message = document.createElement('h1')
+        message.textContent = `The ${selected_monster.name} has Defeated You`
+        message.className = "endMessage"
+        main.appendChild(message)
+}
+
 
