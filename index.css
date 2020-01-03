@@ -107,6 +107,60 @@ body{
 .contract > button:hover{
     transform: scale(1.2);
 }
+.potion_list{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 2rem;
+}
+.potion_card{
+    font-family: 'Metamorphous', cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #211816;
+    border: 2px solid #dab382b3;
+    width: 81%;
+    color: #dab382b3;
+}
+.potion_card > img{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-around;
+    width: 70%;
+}
+.potion_card > h3{
+    height: 20%;
+    padding-left: 11px;
+    padding-right: 5px;
+}
+
+.potion_card>button{
+    font-family: 'Berkshire Swash', cursive;
+    font-size: 0.8rem;
+    height: 2rem;
+    width: 80%;
+    margin-bottom: 1rem;  
+    background-color: #dab382b3;
+}
+.pick_your_potion{
+    font-family: 'Metamorphous', cursive;
+    color: #dab382b3;
+    justify-self: center;
+}
+
+.potion_card:hover{
+    transform: scale(1.2);
+}
+
+
+.pick_your_oil{
+    color: white;
+}
+
+
+
 
 
 
