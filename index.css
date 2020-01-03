@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Berkshire+Swash&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Metamorphous&display=swap');
+/* font-family: 'Berkshire Swash', cursive; */
+/* font-family: 'Metamorphous', cursive; */
 body{
     background-image: url(medallion.gif);
     background-size: cover;
@@ -31,23 +33,46 @@ body{
     text-shadow: 2px 2px 20px white;
     color: black
 }
+.town_board{
+    display: flex;
+    flex-direction: column;
+}
+
+.town_board > img{
+    width: 33%;
+    align-self: center;
+    padding-bottom: 30px;
+}
 .contract_board{
-    position: relative;
-    top: 10rem;
+    font-family: 'Metamorphous', cursive;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
 }
 .contract {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-image: url(contract_background.png);
     background-size: cover;
+    background-position: center;
     color: black;
 }
-
+.contract > h2{
+    padding-bottom: 10px;
+}
+.contract > h4{
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+.contract > h3{
+    margin-left: 15px;
+    margin-right: 15px;
+}
 .contract > img {
-    /* justify-self: center; */
+    border-radius: 7.5px;
+    border: solid 2px black;
     height: 20rem;
     width: 15rem;
 }
