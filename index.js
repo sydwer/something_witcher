@@ -35,6 +35,7 @@ let signArray = null
 let damage_done = []
 let damage_taken = []
 let energy_used = []
+let sword_dmg = 8
 
 let selected_witcher = null
 let selected_monster = null
@@ -347,6 +348,7 @@ function makeMonster(){
     battleField.appendChild(monsterScreen)
 }
 function makeAttackBox(){
+    attackBoxMessage.textContent = "Your Turn"
     instructions.textContent = "Let The Battle Begin"
     main.appendChild(battleField)
     attackBox.className = "attackBox"
@@ -397,41 +399,75 @@ function useSword(){
     attackBoxMessage.textContent = "Your Turn"
     const attempt = Math.floor(Math.random() * selected_monster.dodge_chance)
     if (attempt < 3){
-        alert("You Missed")
+        alert("You Miss")
         
     }else{
-        const newHp = monster_hp -= (damage_done.reduce((a, b) => a + b, 0))
-        monsterHp.textContent = `HP:${newHp}`
+        const newMonsterHp = monster_hp -= (damage_done.reduce((a, b) => a + b, 0))
+        monsterHp.textContent = `HP:${newMonsterHp}`
         alert( "You Hit")
-        if (newHp<1){
+        if (newMonsterHp < 1){
             win()
         }
-
     }
-    attackBoxMessage.textContent = "Monster's Turn"
-    turn = "monster"
-    setTimeout(function(){ monsterTurn(); }, 1000)
-
+        // attackBoxMessage.textContent = "Monster's Turn"
+        attackBoxMessage.textContent = `${selected_monster.name}'s turn`
+        turn = "monster"
+        setTimeout(function(){ monsterTurn(); }, 2000)
 }
 
 function monsterTurn(){
     // attackBox.removeChild(signBar)
     attackBoxMessage.textContent = `${selected_monster.name}'s turn`
     const attempt = Math.floor(Math.random() * selected_monster.accuracy_rtg)
-    if(attempt < 3){
-         damage_taken.push(selected_monster.attack_pwr*1.5)
+    if(attempt < 4){
         alert(`The ${selected_monster.name} hits you for ${selected_monster.attack_pwr} damage`)
+         damage_taken.push(selected_monster.attack_pwr)
         const newHp = witcher_hp -= (damage_taken.reduce((a, b) => a + b, 0))
         witcherHp.textContent = `HP:${newHp}`
         if(newHp<1){
             die()
         }
-    }else{
-        alert(`The ${selected_monster.name} missed its attack`)
+    }else if(attempt === 4){
+        alert(`The ${selected_monster.name} clips you for ${selected_monster.attack_pwr*0.5} damage`)
+        damage_taken.push(selected_monster.attack_pwr * 0.5)
+        const newWitcherHp = witcher_hp -= (damage_taken.reduce((a, b) => a + b, 0))
+        witcherHp.textContent = `HP:${newWitcherHp}`
+        if (newWitcherHp<1){
+            lose()
+        } 
+    }else if( attempt === 3){
+        alert(`You attempt to block ${selected_monster.name}'s attack, but take ${selected_monster.attack_pwr*0.25} damage`)
+        damage_taken.push(selected_monster.attack_pwr* 0.25)
+        const newWitcherHp = witcher_hp -= (damage_taken.reduce((a, b) => a + b, 0))
+        witcherHp.textContent = `HP:${newWitcherHp}`
+        if (newWitcherHp<1){
+            lose()
+        } 
+    }else if( attempt === 2){
+        alert(`You block ${selected_monster.name}'s attack, but suffer ${selected_monster.attack_pwr* 0.1} damage from the force`)
+        damage_taken.push(selected_monster.attack_pwr* 0.1)
+        const newWitcherHp = witcher_hp -= (damage_taken.reduce((a, b) => a + b, 0))
+        witcherHp.textContent = `HP:${newWitcherHp}`
+        if (newWitcherHp<1){
+            lose()
+        } 
+    }else if(attempt === 1){
+        alert(`You dodge ${selected_monster.name}'s attack`)
+        const newWitcherHp = witcher_hp -= (damage_taken.reduce((a, b) => a + b, 0))
+        witcherHp.textContent = `HP:${newWitcherHp}`
+        if (newWitcherHp<1){
+            lose()
+        } 
+    }else if(attempt === 0){
+        const newMonsterHp = monster_hp -= (damage_taken.reduce((a, b) => a + b, 0))
+        alert(`You  block ${selected_monster.name}'s attack, and respond to deal ${selected_monster.attack_pwr} back`)
+        damage_done.push(selected_monster.attack_pwr)
+        if(newMonsterHp < 1){
+            win()
+        }
+        monsterHp.textContent = `HP:${newMonsterHp}`
     }
     attackBoxMessage.textContent = "Your Turn"
-    // reset()
-    
 }
 
 function useSign(){
@@ -442,7 +478,7 @@ function useSign(){
     newEnergy = witcher_energy -= (energy_used.reduce((a, b) => a + b, 0))
     if(newEnergy > -2){
         alert("Hit")
-        damage_done.push(5)
+        damage_done.push(10)
         console.log(monster_hp)
         energy.textContent = `Energy: ${newEnergy}`
         const newHp = monster_hp -= (damage_done.reduce((a, b) => a + b, 0))
@@ -470,8 +506,9 @@ function win(){
 }
 
 function die(){
-    body.style.backgroundImage = "url('https://i.imgur.com/U1av40f.gif?noredirect')"
     main.removeChild(instructions)
+    body.style.backgroundImage = "url('https://i.imgur.com/U1av40f.gif?noredirect')"
+    main.removeChild(battleField)
     const message = document.createElement('h1')
         message.textContent = `The ${selected_monster.name} has Defeated You`
         message.className = "endMessage"
