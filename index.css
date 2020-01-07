@@ -117,7 +117,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: linear-gradient(#352623,#211816);
+    background-image: linear-gradient(#482f2f,black);
     /* background-color: #211816; */
     border: 2px solid #dab382b3;
     width: 81%;
@@ -152,7 +152,7 @@ body{
 }
 
 .potion_card:hover{
-    transform: scale(1.2);
+    box-shadow: 5px 5px 50px white;
 }
 
 .oilList{
@@ -167,7 +167,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    background-image: linear-gradient(#352623,#211816);
+    background-image: linear-gradient(#482f2f,black);
     /* background: #211816; */
     border: 2px solid #dab382b3;
     width: 75%;
@@ -201,7 +201,7 @@ body{
 }
 
 .oilCard:hover{
-    transform: scale(1.2);
+    box-shadow: 5px 5px 50px white;
 }
 .pick_your_oil{
     color:#a0875d;
