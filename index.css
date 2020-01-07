@@ -117,7 +117,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: linear-gradient(#352623,#211816);
+    background-image: linear-gradient(#482f2f,black);
     /* background-color: #211816; */
     border: 2px solid #dab382b3;
     width: 81%;
@@ -141,6 +141,9 @@ body{
     margin-bottom: 1rem;  
     background-color: #dab382b3;
 }
+.potion_card>button:hover{
+    transform: scale(1.2);
+}
 .pick_your_potion{
     font-family: 'Metamorphous', cursive;
     color: #a0875d;
@@ -149,7 +152,7 @@ body{
 }
 
 .potion_card:hover{
-    transform: scale(1.2);
+    box-shadow: 5px 5px 50px white;
 }
 
 .oilList{
@@ -164,7 +167,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    background-image: linear-gradient(#352623,#211816);
+    background-image: linear-gradient(#482f2f,black);
     /* background: #211816; */
     border: 2px solid #dab382b3;
     width: 75%;
@@ -193,8 +196,12 @@ body{
     background-color: #dab382b3;
 }
 
-.oilCard:hover{
+.oilCard>button:hover{
     transform: scale(1.2);
+}
+
+.oilCard:hover{
+    box-shadow: 5px 5px 50px white;
 }
 .pick_your_oil{
     color:#a0875d;
@@ -286,6 +293,7 @@ body{
     color: #a0875d;
     text-shadow: 0px 0px 20px red;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     color: white;
@@ -294,9 +302,44 @@ body{
     width: 20%;
     background-color: #06060085;
 }
+.attackBar{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    color: white;
+}
+.attackBar>img{
+    width: 2rem;
+}
+.swordSprite>img{
+    height: 4rem;
+}
 
+.attackBox>h1{
+    text-shadow: 0px 0px 20px yellow;
+    margin-bottom: .5rem;
+}
 
+.sprite{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
+.sprite>img{
+    height: 4rem;
+}
+.endMessage{
+    font-family: 'Metamorphous', cursive;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    font-size: 5rem;
+    color: white;
+    text-shadow: 0px 0px 50px red;
+}
 
 
 
