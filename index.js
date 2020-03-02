@@ -19,16 +19,20 @@ const basicAudio = new Audio('choir.mp3')
 const battleAudio = new Audio('battle-music.mp3')
 const restartButton = document.createElement('button')
 
+// Re-write these within the functions that use them, not as global variables
+
 restartButton.textContent = "Restart Game"
 
 const geralt = "https://i.pinimg.com/1200x/01/79/49/0179495c7c07259dbe21f53286924e6f.jpg"
+
 const ciri = "https://i.pinimg.com/originals/fa/50/c8/fa50c82ee9f161dffa2b9e497f2691bf.png"
+// Move these to battle creation function
 
 const geraltGif = "https://steamuserimages-a.akamaihd.net/ugc/955227220413855705/181BFD92E6E73EED9C732D60F73B182B3858B2DC/"
 const ciriGif = "https://thumbs.gfycat.com/SpecificCostlyChick-size_restricted.gif"
 
 
-
+// Use Math.round(num * 100) / 100
 
 let battleClip = null
 let monsters = null
@@ -73,32 +77,38 @@ function getSigns(){
 function storeSigns(data){
     signArray = data
 }
-function startGame(){
+function playAudio(){
     basicAudio.play()
+}
+function startGame(){
     enter_button.textContent = "ENTER"
     enter_button.className = "enter_button"
     enter_button.addEventListener("click",whichWitcher)
     banner.src= "something_witcher_this_way_comes.png"
     main.append(banner, enter_button)
+    playAudio()
 }
 
 function whichWitcher(){
+    // basicAudio.play();
     main.removeChild(enter_button)
     main.removeChild(banner)
     banner.style.height = "10rem"
-    const ciri = document.createElement('img')
-    const geralt = document.createElement('img')
+    const geraltBust = document.createElement('img')
+    const ciriBust = document.createElement('img')
     const picBar = document.createElement('div')
     const which = document.createElement('h1')
 
-    ciri.src = "https://purepng.com/public/uploads/medium/purepng.com-the-witcher-3-ciriwitcherthe-witcherandrzej-sapkowskiwriterfantasy-serieswitcher-geralt-of-riviawitchersbooksmonster-hunterssupernaturaldeadly-beastsseriesvideo-gamesxbox-1701528661235ezoqo.png"
-    geralt.src = "http://pluspng.com/img-png/the-witcher-png-the-witcher-png-hd-676.png"
+    ciriBust.src = "https://purepng.com/public/uploads/medium/purepng.com-the-witcher-3-ciriwitcherthe-witcherandrzej-sapkowskiwriterfantasy-serieswitcher-geralt-of-riviawitchersbooksmonster-hunterssupernaturaldeadly-beastsseriesvideo-gamesxbox-1701528661235ezoqo.png"
+    geraltBust.src = "http://pluspng.com/img-png/the-witcher-png-the-witcher-png-hd-676.png"
+    ciriBust.className = "witcherBust";
+    geraltBust.className = "witcherBust";
     which.className = "whichWitcher"
     picBar.className = "picBar"
     geralt.className = "geraltButton"
     decisionBox.className = "decisionBox"
     which.textContent = "Pick Your Witcher"
-    picBar.append(geralt, ciri)
+    picBar.append(geraltBust, ciriBust)
     decisionBox.append(which,picBar)
     main.appendChild(decisionBox)
     decisionBox.addEventListener("click",loadWitcher)
@@ -252,7 +262,9 @@ function useOil(event){
         goToEncounter()
 }
 function goToEncounter(){
+    basicAudio.pause();
     battleAudio.play();
+    battleAudio.volume = 0.5;
     if(selected_witcher === geralt){
         body.style.backgroundImage = "url('https://thumbs.gfycat.com/ExcitableAridBetafish.webp')"
     }else{
@@ -267,6 +279,7 @@ function beginEncounter(){
     // instructions.textContent = "Let the Battle Begin"
     instructions.className = "battleBanner"
     // instructions.style.fontcolor= "red"
+    battleAudio.volume = 0.1
     makeScreen()
 
    
@@ -401,6 +414,7 @@ function useSword(){
     // console.log("hi")
     attackBoxMessage.textContent = "Your Turn"
     const attempt = Math.floor(Math.random() * selected_monster.dodge_chance)
+    playSound(attempt)
     console.log(attempt)
    if(attempt === 4){
         console.log("clip")
@@ -408,6 +422,8 @@ function useSword(){
         damage_done.push(sword_dmg*0.5)
         const newMonsterHp = monster_hp - (damage_done.reduce((a, b) => a + b, 0))
         monsterHp.textContent = `HP:${newMonsterHp}`
+        // make this one line at end of function
+
         if (newMonsterHp < 1){
             win()
         }
@@ -417,6 +433,8 @@ function useSword(){
         damage_done.push(sword_dmg*0.25)
         const newMonsterHp = monster_hp - (damage_done.reduce((a, b) => a + b, 0))
         monsterHp.textContent = `HP:${newMonsterHp}`
+        // make this one line at end of function
+
         if (newMonsterHp < 1){
             win()
         }
@@ -426,6 +444,8 @@ function useSword(){
         damage_done.push(sword_dmg*0.1)
         const newMonsterHp = monster_hp - (damage_done.reduce((a, b) => a + b, 0))
         monsterHp.textContent = `HP:${newMonsterHp}`
+        // make this one line at end of function
+
         if (newMonsterHp < 1){
             win()
         }
@@ -441,6 +461,8 @@ function useSword(){
         const newWitcherHp = witcher_hp - (damage_taken.reduce((a, b) => a + b, 0))
         alert(`${selected_monster.name} blocks your attack, and responds to deal ${sword_dmg} damage back to you`)
         witcherHp.textContent = `HP:${newWitcherHp}`
+        // make this one line at end of function
+
         if (newWitcherHp < 1){
             die()
         }
@@ -450,6 +472,8 @@ function useSword(){
             damage_done.push(sword_dmg)
             const newMonsterHp = monster_hp - (damage_done.reduce((a, b) => a + b, 0))
             monsterHp.textContent = `HP:${newMonsterHp}`
+        // make this one line at end of function
+
             if (newMonsterHp < 1){
                 win()
             }
@@ -465,6 +489,7 @@ function monsterTurn(){
     // attackBox.removeChild(signBar)
     attackBoxMessage.textContent = `${selected_monster.name}'s turn`
     const attempt = Math.floor(Math.random() * selected_monster.accuracy_rtg)
+    playSound(attempt)
     if(attempt === 4){
         alert(`You try to dodge, but ${selected_monster.name} clips you for ${selected_monster.attack_pwr*0.5} damage`)
         damage_taken.push(selected_monster.attack_pwr * 0.5)
@@ -473,11 +498,15 @@ function monsterTurn(){
             die()
         } 
         witcherHp.textContent = `HP:${newWitcherHp}`
+        // make this one line at end of function
+
     }else if( attempt === 3){
         alert(`You poorly block ${selected_monster.name}'s attack, taking ${selected_monster.attack_pwr*0.25} damage`)
         damage_taken.push(selected_monster.attack_pwr* 0.25)
         const newWitcherHp = witcher_hp - (damage_taken.reduce((a, b) => a + b, 0))
         witcherHp.textContent = `HP:${newWitcherHp}`
+        // make this one line at end of function
+
         if (newWitcherHp<1){
             die()
         } 
@@ -486,6 +515,8 @@ function monsterTurn(){
         damage_taken.push(selected_monster.attack_pwr* 0.1)
         const newWitcherHp = witcher_hp - (damage_taken.reduce((a, b) => a + b, 0))
         witcherHp.textContent = `HP:${newWitcherHp}`
+        // make this one line at end of function
+
         if (newWitcherHp<1){
             die()
         } 
@@ -494,6 +525,8 @@ function monsterTurn(){
         damage_taken.push(0)
         const newWitcherHp = witcher_hp - (damage_taken.reduce((a, b) => a + b, 0))
         witcherHp.textContent = `HP:${newWitcherHp}`
+        // make this one line at end of function
+
         if (newWitcherHp<1){
             die()
         } 
@@ -502,6 +535,8 @@ function monsterTurn(){
         damage_done.push(selected_monster.attack_pwr)
         const newMonsterHp = monster_hp - (damage_done.reduce((a, b) => a + b, 0))
         monsterHp.textContent = `HP:${newMonsterHp}`
+        // make this one line at end of function
+
         if(newMonsterHp < 1){
             win()
         }
@@ -510,6 +545,8 @@ function monsterTurn(){
         damage_taken.push(selected_monster.attack_pwr)
         const newWitcherHp = witcher_hp - (damage_taken.reduce((a, b) => a + b, 0))
         witcherHp.textContent = `HP:${newWitcherHp}`
+        // make this one line at end of function
+
         if(newWitcherHp<1){
             die()
         }
@@ -524,12 +561,15 @@ function useSign(){
     energy_used.push(1)
     newEnergy = witcher_energy - (energy_used.reduce((a, b) => a + b, 0))
     if(newEnergy > -2){
+        const spell = new Audio('spell.mp3')
+        spell.play()
         alert(` You hit ${selected_monster.name} for 10 damage`)
         damage_done.push(10)
         console.log(monster_hp)
         energy.textContent = `Energy: ${newEnergy}`
         const newMonsterHp = monster_hp - (damage_done.reduce((a, b) => a + b, 0))
         monsterHp.textContent = `HP:${newMonsterHp}`
+
 
         if(newMonsterHp<1){win()}
     }else{
@@ -540,7 +580,20 @@ function useSign(){
     setTimeout(function(){ monsterTurn(); }, 2500)
    
     // winOrDie()
+}
+function playSound(roll){
+    const dodge = new Audio('dodge.mp3')
+    const parry = new Audio('parry.mp3')
+    const attackHit = new Audio('attack_hit.mp3')
 
+    if (roll === 3 || roll === 2){
+        parry.play()
+    }
+    else if(roll === 1){
+        dodge.play()
+    }else {
+        attackHit.play()
+    }
 }
 function win(){
     main.removeChild(instructions)
@@ -567,8 +620,9 @@ function die(){
 }
 
 function reset(){
-    basicAudio.play()
-    main.removeChild(message)
+    battleAudio.pause();
+    basicAudio.play();
+    main.removeChild(message);
     startGame()
 }
 

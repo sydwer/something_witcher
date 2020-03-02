@@ -35,6 +35,14 @@ body{
     text-shadow: 2px 2px 20px white;
     color: black
 }
+.witcherBust{
+    opacity: 0.6;
+}
+.witcherBust:hover{
+    transform: scale(1.3);
+    opacity: 1;
+}
+
 .town_board{
     display: flex;
     flex-direction: column;
