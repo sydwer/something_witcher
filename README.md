@@ -3,6 +3,12 @@ _A game based on Andrzej Sapkowski's "The Witcher". Players select their witcher
 ## General Info
 Players make a number of decisions that affect their game's narrative
 
+#### Screen capture links: 
+[Example Monster Contract](https://drive.google.com/open?id=16E3DPlhaU2j1tKRmPqdEsgVO8q6a6lWe)
+
+[Battle Page](https://drive.google.com/open?id=162xOSW74zwV7Nxfs8dAvN63bE8L69gQa)
+
+
 ### Rules
 1. After entering the game, players are given the choice of which Witcher they wish to play as. By clicking on teh character's image, they can choose either Geralt of Rivia, or Ciri.
 
@@ -45,29 +51,4 @@ _Spells require energy, and the player is given a default 5 energy. Once all the
 ### Status
 
 The app is undeployed and incomplete as the potions and oils are not fully fleshed out; the app will be deployed once teh to-do list stated above has been improved upon. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-photo placegholders: [homepage](https://drive.google.com/open?id=162xOSW74zwV7Nxfs8dAvN63bE8L69gQa)
-
-![foglet card] (https://drive.google.com/open?id=16E3DPlhaU2j1tKRmPqdEsgVO8q6a6lWe)
-
 
