@@ -38,7 +38,7 @@ _Spells require energy, and the player is given a default 5 energy. Once all the
 - Ruby on Rails
 
 ## To-Do's
-- Further refactor to greatly reduce number of global varaibles, and to reduce redundancy by adding in  helper functions.
+- Further refactor to greatly reduce number of global variables, and to reduce redundancy by adding in helper functions.
 - Rebalance the monsters' attack values so the battles last longer and require more strategy(as these were reduced for the sake of demoing the game in a timely manner).
 - Further personailze the effects of each potion and oil the player can choose from.
 
