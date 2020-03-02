@@ -17,7 +17,7 @@ Each contract shows:
 
 _Monster images, location, and synopsis taken from the Witcher game Wiki page_
 
-3. After selecting the contract for the desired monster, players are taken to the selection pages for **potions** and **oils**. Each one grant boosts to abilities or types of damage dealt in battle.
+3. After selecting the contract for the desired monster, players are taken to the selection pages for **potions** and **oils**. Each one grants a boost to the player character or types of damage dealt in battle.
 
 4. With these decisons made, another cutscen plays along with battle music.
 
