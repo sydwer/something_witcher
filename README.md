@@ -1,7 +1,7 @@
 # Something Witcher This Way Comes
 _A game based on Andrzej Sapkowski's "The Witcher". Players select their witcher (Geralt or Ciri) and a monster to fight, before entering a turn based battle_
 ## General Info
-Players make a number of decisions that their game's narrative
+Players make a number of decisions that affect their game's narrative
 
 ### Rules
 1. After entering the game, players are given the choice of which Witcher they wish to play as. By clicking on teh character's image, they can choose either Geralt of Rivia, or Ciri.
