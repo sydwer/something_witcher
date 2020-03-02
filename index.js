@@ -19,10 +19,14 @@ const basicAudio = new Audio('choir.mp3')
 const battleAudio = new Audio('battle-music.mp3')
 const restartButton = document.createElement('button')
 
+// Re-write these within the functions that use them, not as global variables
+
 restartButton.textContent = "Restart Game"
 
 const geralt = "https://i.pinimg.com/1200x/01/79/49/0179495c7c07259dbe21f53286924e6f.jpg"
+
 const ciri = "https://i.pinimg.com/originals/fa/50/c8/fa50c82ee9f161dffa2b9e497f2691bf.png"
+// Move these to battle creation function
 
 const geraltGif = "https://steamuserimages-a.akamaihd.net/ugc/955227220413855705/181BFD92E6E73EED9C732D60F73B182B3858B2DC/"
 const ciriGif = "https://thumbs.gfycat.com/SpecificCostlyChick-size_restricted.gif"
@@ -90,19 +94,21 @@ function whichWitcher(){
     main.removeChild(enter_button)
     main.removeChild(banner)
     banner.style.height = "10rem"
-    const ciri = document.createElement('img')
-    const geralt = document.createElement('img')
+    const geraltBust = document.createElement('img')
+    const ciriBust = document.createElement('img')
     const picBar = document.createElement('div')
     const which = document.createElement('h1')
 
-    ciri.src = "https://purepng.com/public/uploads/medium/purepng.com-the-witcher-3-ciriwitcherthe-witcherandrzej-sapkowskiwriterfantasy-serieswitcher-geralt-of-riviawitchersbooksmonster-hunterssupernaturaldeadly-beastsseriesvideo-gamesxbox-1701528661235ezoqo.png"
-    geralt.src = "http://pluspng.com/img-png/the-witcher-png-the-witcher-png-hd-676.png"
+    ciriBust.src = "https://purepng.com/public/uploads/medium/purepng.com-the-witcher-3-ciriwitcherthe-witcherandrzej-sapkowskiwriterfantasy-serieswitcher-geralt-of-riviawitchersbooksmonster-hunterssupernaturaldeadly-beastsseriesvideo-gamesxbox-1701528661235ezoqo.png"
+    geraltBust.src = "http://pluspng.com/img-png/the-witcher-png-the-witcher-png-hd-676.png"
+    ciriBust.className = "witcherBust";
+    geraltBust.className = "witcherBust";
     which.className = "whichWitcher"
     picBar.className = "picBar"
     geralt.className = "geraltButton"
     decisionBox.className = "decisionBox"
     which.textContent = "Pick Your Witcher"
-    picBar.append(geralt, ciri)
+    picBar.append(geraltBust, ciriBust)
     decisionBox.append(which,picBar)
     main.appendChild(decisionBox)
     decisionBox.addEventListener("click",loadWitcher)
