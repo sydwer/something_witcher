@@ -56,5 +56,5 @@ _Spells require energy, and the player is given a default 5 energy. Once all the
 
 ### Status
 
-The app is undeployed and incomplete as the potions and oils are not fully fleshed out; the app will be deployed once teh to-do list stated above has been improved upon. 
+The app is undeployed and incomplete as the potions and oils are not fully fleshed out; the app will be deployed once the to-do list stated above has been improved upon. 
 
