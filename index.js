@@ -18,6 +18,7 @@ const ciriButton = document.createElement('button')
 const basicAudio = new Audio('choir.mp3')
 const battleAudio = new Audio('battle-music.mp3')
 const restartButton = document.createElement('button')
+// hi
 
 // Re-write these within the functions that use them, not as global variables
 
@@ -86,11 +87,11 @@ function startGame(){
     enter_button.addEventListener("click",whichWitcher)
     banner.src= "something_witcher_this_way_comes.png"
     main.append(banner, enter_button)
-    playAudio()
+    // playAudio()
 }
 
 function whichWitcher(){
-    // basicAudio.play();
+    basicAudio.play();
     main.removeChild(enter_button)
     main.removeChild(banner)
     banner.style.height = "10rem"
@@ -103,6 +104,7 @@ function whichWitcher(){
     geraltBust.src = "http://pluspng.com/img-png/the-witcher-png-the-witcher-png-hd-676.png"
     ciriBust.className = "witcherBust";
     geraltBust.className = "witcherBust";
+    geraltBust.id = "geraltBust";
     which.className = "whichWitcher"
     picBar.className = "picBar"
     geralt.className = "geraltButton"
@@ -117,7 +119,7 @@ function whichWitcher(){
 
 function loadWitcher(event){
 
-    if (event.target.className === "geraltButton"){
+    if (event.target.id === "geraltBust"){
         selected_witcher = geralt
     }else{
         selected_witcher = ciri
@@ -560,7 +562,7 @@ function useSign(){
      
     energy_used.push(1)
     newEnergy = witcher_energy - (energy_used.reduce((a, b) => a + b, 0))
-    if(newEnergy > -2){
+    if(newEnergy > -1){
         const spell = new Audio('spell.mp3')
         spell.play()
         alert(` You hit ${selected_monster.name} for 10 damage`)

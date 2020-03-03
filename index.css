@@ -328,6 +328,10 @@ body{
     text-shadow: 0px 0px 20px yellow;
     margin-bottom: .5rem;
 }
+.sprite>img:hover{
+    transform: scale(1.4);
+    
+}
 
 .sprite{
     display: flex;
