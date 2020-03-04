@@ -9,7 +9,7 @@ Players make a number of decisions that affect their game's narrative
 [Battle Page](https://drive.google.com/open?id=162xOSW74zwV7Nxfs8dAvN63bE8L69gQa)
 
 #### Video Demo Link:
-[Youtube](https://youtu.be/s5tDwUE7y1I)
+[Youtube](https://youtu.be/rdgAvNXgxk8)
 
 ### Rules
 1. After entering the game, players are given the choice of which Witcher they wish to play as. By clicking on teh character's image, they can choose either Geralt of Rivia, or Ciri.
