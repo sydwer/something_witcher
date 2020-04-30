@@ -79,19 +79,20 @@ function storeSigns(data){
     signArray = data
 }
 function playAudio(){
-    basicAudio.play()
+    basicAudio.play();
+    basicAudio.volume = 0.4
 }
 function startGame(){
     enter_button.textContent = "ENTER"
     enter_button.className = "enter_button"
     enter_button.addEventListener("click",whichWitcher)
-    banner.src= "something_witcher_this_way_comes.png"
+    banner.src = "something_witcher_this_way_comes.png"
     main.append(banner, enter_button)
     // playAudio()
 }
 
 function whichWitcher(){
-    basicAudio.play();
+    playAudio();
     main.removeChild(enter_button)
     main.removeChild(banner)
     banner.style.height = "10rem"
@@ -266,7 +267,7 @@ function useOil(event){
 function goToEncounter(){
     basicAudio.pause();
     battleAudio.play();
-    battleAudio.volume = 0.5;
+    battleAudio.volume = 0.3;
     if(selected_witcher === geralt){
         body.style.backgroundImage = "url('https://thumbs.gfycat.com/ExcitableAridBetafish.webp')"
     }else{
@@ -414,81 +415,78 @@ function displayAttacks(){
 
 function useSword(){
     // console.log("hi")
+    ///////////
+    // newMonsterHp =
+    // newWitcherHp =
+    // PUT THESE HERE AND DELETE THE REPETITIVE CALLS WITHIN EACH CHECK. PUT NEW HEALTH MESSAGE AT END OF CHECKS
+    ////////
     attackBoxMessage.textContent = "Your Turn"
     const attempt = Math.floor(Math.random() * selected_monster.dodge_chance)
     playSound(attempt)
     console.log(attempt)
    if(attempt === 4){
-        console.log("clip")
         alert(`${selected_monster.name} attempts to dodge, but you clip it for ${sword_dmg*0.5} damage`)
         damage_done.push(sword_dmg*0.5)
         const newMonsterHp = monster_hp - (damage_done.reduce((a, b) => a + b, 0))
-        monsterHp.textContent = `HP:${newMonsterHp}`
-        // make this one line at end of function
+        monsterHp.textContent = `HP:${newMonsterHp.toFixed(0)}`
 
         if (newMonsterHp < 1){
             win()
         }
     }else if( attempt === 3){
-        console.log("bad attempt")
         alert(`${selected_monster.name} attempts to block your attack, but takes ${sword_dmg*0.25} damage`)
         damage_done.push(sword_dmg*0.25)
         const newMonsterHp = monster_hp - (damage_done.reduce((a, b) => a + b, 0))
-        monsterHp.textContent = `HP:${newMonsterHp}`
-        // make this one line at end of function
+        monsterHp.textContent = `HP:${newMonsterHp.toFixed(0)}`
 
         if (newMonsterHp < 1){
             win()
         }
     } else if( attempt === 2){
-        console.log("block")
         alert(`${selected_monster.name} blocks your attack, but takes ${sword_dmg*0.1} damage from the force`)
         damage_done.push(sword_dmg*0.1)
         const newMonsterHp = monster_hp - (damage_done.reduce((a, b) => a + b, 0))
-        monsterHp.textContent = `HP:${newMonsterHp}`
-        // make this one line at end of function
+        monsterHp.textContent = `HP:${newMonsterHp.toFixed(0)}`
 
         if (newMonsterHp < 1){
             win()
         }
     }else if ( attempt === 1){
-        console.log("dodge")
         damage_done.push(0)
         alert(`${selected_monster.name} dodges your attack`)
         const newMonsterHp = monster_hp - (damage_done.reduce((a, b) => a + b, 0))
-        monsterHp.textContent = `HP:${newMonsterHp}`
+        monsterHp.textContent = `HP:${newMonsterHp.toFixed(0)}`
     }else if( attempt === 0){
-        console.log("respond")
         damage_taken.push(sword_dmg)
         const newWitcherHp = witcher_hp - (damage_taken.reduce((a, b) => a + b, 0))
         alert(`${selected_monster.name} blocks your attack, and responds to deal ${sword_dmg} damage back to you`)
-        witcherHp.textContent = `HP:${newWitcherHp}`
-        // make this one line at end of function
+        witcherHp.textContent = `HP:${newWitcherHp.toFixed(0)}`
 
         if (newWitcherHp < 1){
             die()
         }
     }else{
-            console.log("it should be a hit")
             alert( `You hit ${selected_monster.name} for ${sword_dmg} damage`)
             damage_done.push(sword_dmg)
             const newMonsterHp = monster_hp - (damage_done.reduce((a, b) => a + b, 0))
-            monsterHp.textContent = `HP:${newMonsterHp}`
-        // make this one line at end of function
+            monsterHp.textContent = `HP:${newMonsterHp.toFixed(0)}`
 
             if (newMonsterHp < 1){
                 win()
             }
     }
-        // attackBoxMessage.textContent = "Monster's Turn"
+        // monsterHp.textContent = `HP:${newMonsterHp.toFixed(0)}`
         attackBoxMessage.textContent = `${selected_monster.name}'s turn`
         turn = "monster"
         setTimeout(function(){ monsterTurn(); }, 2000)
 }
-// const newWitcherHp = round(witcher_hp -= (damage_taken.reduce((a, b) => a + b, 0)),2)
-// const newMonsterHp = round(monster_hp -= (damage_done.reduce((a, b) => a + b, 0)),2)
+
 function monsterTurn(){
-    // attackBox.removeChild(signBar)
+    ///////////
+    // newMonsterHp =
+    // newWitcherHp =
+    // PUT THESE HERE AND DELETE THE REPETITIVE CALLS WITHIN EACH CHECK. PUT NEW HEALTH MESSAGE AT END OF CHECKS
+    ////////
     attackBoxMessage.textContent = `${selected_monster.name}'s turn`
     const attempt = Math.floor(Math.random() * selected_monster.accuracy_rtg)
     playSound(attempt)
@@ -499,15 +497,13 @@ function monsterTurn(){
         if (newWitcherHp<1){
             die()
         } 
-        witcherHp.textContent = `HP:${newWitcherHp}`
-        // make this one line at end of function
+        witcherHp.textContent = `HP:${newWitcherHp.toFixed(0)}`
 
     }else if( attempt === 3){
         alert(`You poorly block ${selected_monster.name}'s attack, taking ${selected_monster.attack_pwr*0.25} damage`)
         damage_taken.push(selected_monster.attack_pwr* 0.25)
         const newWitcherHp = witcher_hp - (damage_taken.reduce((a, b) => a + b, 0))
-        witcherHp.textContent = `HP:${newWitcherHp}`
-        // make this one line at end of function
+        witcherHp.textContent = `HP:${newWitcherHp.toFixed(0)}`
 
         if (newWitcherHp<1){
             die()
@@ -516,8 +512,7 @@ function monsterTurn(){
         alert(`You block ${selected_monster.name}'s attack, but suffer ${selected_monster.attack_pwr* 0.1} damage from the force`)
         damage_taken.push(selected_monster.attack_pwr* 0.1)
         const newWitcherHp = witcher_hp - (damage_taken.reduce((a, b) => a + b, 0))
-        witcherHp.textContent = `HP:${newWitcherHp}`
-        // make this one line at end of function
+        witcherHp.textContent = `HP:${newWitcherHp.toFixed(0)}`
 
         if (newWitcherHp<1){
             die()
@@ -526,8 +521,7 @@ function monsterTurn(){
         alert(`You dodge ${selected_monster.name}'s attack`)
         damage_taken.push(0)
         const newWitcherHp = witcher_hp - (damage_taken.reduce((a, b) => a + b, 0))
-        witcherHp.textContent = `HP:${newWitcherHp}`
-        // make this one line at end of function
+        witcherHp.textContent = `HP:${newWitcherHp.toFixed(0)}`
 
         if (newWitcherHp<1){
             die()
@@ -536,8 +530,7 @@ function monsterTurn(){
         alert(`You  block ${selected_monster.name}'s attack, and respond to deal ${selected_monster.attack_pwr} damage back`)
         damage_done.push(selected_monster.attack_pwr)
         const newMonsterHp = monster_hp - (damage_done.reduce((a, b) => a + b, 0))
-        monsterHp.textContent = `HP:${newMonsterHp}`
-        // make this one line at end of function
+        monsterHp.textContent = `HP:${newMonsterHp.toFixed(0)}`
 
         if(newMonsterHp < 1){
             win()
@@ -546,17 +539,21 @@ function monsterTurn(){
         alert(`The ${selected_monster.name} hits you for ${selected_monster.attack_pwr} damage`)
         damage_taken.push(selected_monster.attack_pwr)
         const newWitcherHp = witcher_hp - (damage_taken.reduce((a, b) => a + b, 0))
-        witcherHp.textContent = `HP:${newWitcherHp}`
-        // make this one line at end of function
+        witcherHp.textContent = `HP:${newWitcherHp.toFixed(0)}`
 
         if(newWitcherHp<1){
             die()
         }
     }
+    // witcherHp.textContent = `HP:${newWitcherHp.toFixed(0)}`
     attackBoxMessage.textContent = "Your Turn"
 }
 
 function useSign(){
+    ///////////
+    // newMonsterHp =
+    // PUT THIS HERE AND DELETE THE REPETITIVE CALLS WITHIN EACH CHECK. PUT NEW HEALTH MESSAGE AT END OF CHECKS
+    ////////
     attackBoxMessage.textContent = `${selected_monster.name}'s turn`
     console.log(event.target.value)
      
@@ -570,7 +567,7 @@ function useSign(){
         console.log(monster_hp)
         energy.textContent = `Energy: ${newEnergy}`
         const newMonsterHp = monster_hp - (damage_done.reduce((a, b) => a + b, 0))
-        monsterHp.textContent = `HP:${newMonsterHp}`
+        monsterHp.textContent = `HP:${newMonsterHp.toFixed(0)}`
 
 
         if(newMonsterHp<1){win()}
