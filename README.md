@@ -50,7 +50,6 @@ _Spells require energy, and the player is given a default 5 energy. Once all the
 
 ## To-Do's
 - Further refactor to greatly reduce number of global variables, and to reduce redundancy by adding in helper functions.
-- Upon refactoring monster and Witcher health checks, add in a function to round the displayed number to an acceptable number of decimal places.
 - Rebalance the monsters' attack values so the battles last longer and require more strategy(as these were reduced for the sake of demoing the game in a timely manner).
 - Further personailze the effects of each potion and oil the player can choose from.
 
