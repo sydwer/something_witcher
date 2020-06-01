@@ -15,8 +15,8 @@ const attackBox = document.createElement('div')
 const attackBoxMessage = document.createElement('h1')
 const geraltButton = document.createElement('button')
 const ciriButton = document.createElement('button')
-const basicAudio = new Audio('choir.mp3')
-const battleAudio = new Audio('battle-music.mp3')
+// const basicAudio = new Audio('choir.mp3')
+// const battleAudio = new Audio('battle-music.mp3')
 const restartButton = document.createElement('button')
 // hi
 
@@ -35,25 +35,48 @@ const ciriGif = "https://thumbs.gfycat.com/SpecificCostlyChick-size_restricted.g
 
 // Use Math.round(num * 100) / 100
 
+const equipped = { 
+    selected_witcher: null, 
+    selected_monster: null,
+    equipped_potion: null,
+    equipped_oil: null,
+
+}
+
+const stats = {
+    monster_hp: null,
+    witcher_hp: 100,
+    witcher_energy: 4,
+    sword_dmg: 8,
+}
+
+const mechanics = {
+    damage_done: [],
+    damage_taken: [],
+    energy_used: [],
+}
+
+//These can be moved into the creation functions, once that portion of the refactor is started
 let battleClip = null
 let monsters = null
 let potions = null
 let oils = null
 let signArray = null
-let damage_done = []
-let damage_taken = []
-let energy_used = []
-let sword_dmg = 8
+//Move these according to message above^^^
+// let damage_done = []
+// let damage_taken = []
+// let energy_used = []
+// let sword_dmg = 8
 
-let selected_witcher = null
-let selected_monster = null
-let equipped_potion = null
-let equipped_oil = null
+// let selected_witcher = null
+// let selected_monster = null
+// let equipped_potion = null
+// let equipped_oil = null
 
 let turn = "witcher"
-let monster_hp = null 
-let witcher_hp = 100
-let witcher_energy = 4
+// let monster_hp = null 
+// let witcher_hp = 100
+// let witcher_energy = 4
 
 
 banner.className = "banner"
@@ -82,6 +105,18 @@ function playAudio(){
     basicAudio.play();
     basicAudio.volume = 0.4
 }
+
+function playBasicAudio(){
+    const basicAudio = new Audio('choir.mp3')
+    basicAudio.play();
+    basicAudio.volume = 0.4;
+}
+
+function playBattleAudio(){
+    const battleAudio = new Audio('battle-music.mp3')
+    battleAudio.play();
+}
+
 function startGame(){
     enter_button.textContent = "ENTER"
     enter_button.className = "enter_button"
