@@ -15,8 +15,8 @@ const attackBox = document.createElement('div')
 const attackBoxMessage = document.createElement('h1')
 const geraltButton = document.createElement('button')
 const ciriButton = document.createElement('button')
-const basicAudio = new Audio('choir.mp3')
-const battleAudio = new Audio('battle-music.mp3')
+// const basicAudio = new Audio('choir.mp3')
+// const battleAudio = new Audio('battle-music.mp3')
 const restartButton = document.createElement('button')
 // hi
 
@@ -105,6 +105,18 @@ function playAudio(){
     basicAudio.play();
     basicAudio.volume = 0.4
 }
+
+function playBasicAudio(){
+    const basicAudio = new Audio('choir.mp3')
+    basicAudio.play();
+    basicAudio.volume = 0.4;
+}
+
+function playBattleAudio(){
+    const battleAudio = new Audio('battle-music.mp3')
+    battleAudio.play();
+}
+
 function startGame(){
     enter_button.textContent = "ENTER"
     enter_button.className = "enter_button"
