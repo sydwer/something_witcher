@@ -35,6 +35,14 @@ const ciriGif = "https://thumbs.gfycat.com/SpecificCostlyChick-size_restricted.g
 
 // Use Math.round(num * 100) / 100
 
+let equipped = { 
+    selected_witcher: null, 
+    selected_monster: null,
+    equipped_potion: null,
+    equipped_oil: null,
+
+}
+
 let battleClip = null
 let monsters = null
 let potions = null
@@ -45,10 +53,10 @@ let damage_taken = []
 let energy_used = []
 let sword_dmg = 8
 
-let selected_witcher = null
-let selected_monster = null
-let equipped_potion = null
-let equipped_oil = null
+// let selected_witcher = null
+// let selected_monster = null
+// let equipped_potion = null
+// let equipped_oil = null
 
 let turn = "witcher"
 let monster_hp = null 
